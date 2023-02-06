@@ -1,0 +1,75 @@
+info:
+  app:
+    name: webhook
+    version: 1.0.0-SNAPSHOT
+    description:  webhook
+
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false
+
+management:
+  security:
+    enabled: false
+    
+spring:
+  profiles:
+    active: prod
+---
+spring:
+  profiles: prod
+  pid:
+    file: /webhook/run/webhook.pid
+logging:
+  config: classpath:logback-prod.xml
+log:
+  file:
+    path: "/webhook/logs"
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      rotate: true      
+      encoding: UTF-8
+      pattern: "%h %l %u [%t] \"%m %U %H\" %s %b %D"
+      enabled: true
+    basedir: "/webhook"
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true  
+webhook:
+  patchfile: /webhook/files/patches.yaml
+  
+---
+spring:
+  profiles: local
+  pid:
+    file: C://dev/work/webhook/run/webhook.pid
+logging:
+  config: classpath:logback-local.xml
+log:
+  file:
+    path: "C://dev/work/webhook/logs"
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      rotate: true      
+      encoding: UTF-8
+      pattern: "%h %l %u [%t] \"%m %U %H\" %s %b %D"
+      enabled: true
+    basedir: "C://dev/work/webhook"
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+webhook:
+  patchfile: D://dev/workspaces/webhook/files/patches.yaml
+  
+      

@@ -1,0 +1,25 @@
+[
+  {
+    "op":"add",
+    "path":"/spec/containers/-",
+    "value": {
+      "name":"nginx",
+      "image":"nginx:1.12.2",
+      "resources":{}
+    }
+  },
+  {
+    "op":"add",
+    "path":"/spec/volumes/-",
+    "value":{
+      "name":"nginx-conf"
+    }
+   },
+  {
+    "op":"add",
+    "path":"/metadata/annotations",
+    "value": {
+      "sidecar-injector-webhook.wbl.com/status":"injected"
+    }
+  }
+]
